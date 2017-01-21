@@ -51,6 +51,8 @@ class MQTTSubscribeViewController: UIViewController {
         }))
         
         topicListView.isHidden = true
+        topicListView.layer.zPosition = 1
+        messagesTextView.isEditable = false
         
         mqtt = CocoaMQTT(clientId: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: PRODUCTION_HOST_NAME, port: PORT)
         mqtt.keepAlive = 90
