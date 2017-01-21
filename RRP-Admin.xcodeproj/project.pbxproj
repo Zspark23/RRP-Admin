@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		14DD5F2E1E33EF9400AF2119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */; };
-		14DD5F301E33EF9400AF2119 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F2F1E33EF9400AF2119 /* ViewController.swift */; };
+		14DD5F301E33EF9400AF2119 /* MQTTSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F2F1E33EF9400AF2119 /* MQTTSubscribeViewController.swift */; };
 		14DD5F331E33EF9400AF2119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F311E33EF9400AF2119 /* Main.storyboard */; };
 		14DD5F351E33EF9400AF2119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F341E33EF9400AF2119 /* Assets.xcassets */; };
 		14DD5F381E33EF9400AF2119 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F361E33EF9400AF2119 /* LaunchScreen.storyboard */; };
+		C776BA72548CC9927A194543 /* Pods_RRP_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14DD5F2A1E33EF9400AF2119 /* RRP-Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RRP-Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		14DD5F2F1E33EF9400AF2119 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		14DD5F2F1E33EF9400AF2119 /* MQTTSubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTSubscribeViewController.swift; sourceTree = "<group>"; };
 		14DD5F321E33EF9400AF2119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14DD5F341E33EF9400AF2119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14DD5F371E33EF9400AF2119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DD5F391E33EF9400AF2119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.release.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.release.xcconfig"; sourceTree = "<group>"; };
+		6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.debug.xcconfig"; sourceTree = "<group>"; };
+		F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RRP_Admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C776BA72548CC9927A194543 /* Pods_RRP_Admin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E1F84E84CF11D7DE1AE2748 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */,
+				3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		14DD5F211E33EF9400AF2119 = {
 			isa = PBXGroup;
 			children = (
 				14DD5F2C1E33EF9400AF2119 /* RRP-Admin */,
 				14DD5F2B1E33EF9400AF2119 /* Products */,
+				0E1F84E84CF11D7DE1AE2748 /* Pods */,
+				724B99F75409A741DE72B99E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +71,21 @@
 			isa = PBXGroup;
 			children = (
 				14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */,
-				14DD5F2F1E33EF9400AF2119 /* ViewController.swift */,
+				14DD5F2F1E33EF9400AF2119 /* MQTTSubscribeViewController.swift */,
 				14DD5F311E33EF9400AF2119 /* Main.storyboard */,
 				14DD5F341E33EF9400AF2119 /* Assets.xcassets */,
 				14DD5F361E33EF9400AF2119 /* LaunchScreen.storyboard */,
 				14DD5F391E33EF9400AF2119 /* Info.plist */,
 			);
 			path = "RRP-Admin";
+			sourceTree = "<group>";
+		};
+		724B99F75409A741DE72B99E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14DD5F3C1E33EF9400AF2119 /* Build configuration list for PBXNativeTarget "RRP-Admin" */;
 			buildPhases = (
+				FC526D1F1BDDA6CCE45DC604 /* [CP] Check Pods Manifest.lock */,
 				14DD5F261E33EF9400AF2119 /* Sources */,
 				14DD5F271E33EF9400AF2119 /* Frameworks */,
 				14DD5F281E33EF9400AF2119 /* Resources */,
+				601E4B4B2D1F21EBE5EA9026 /* [CP] Embed Pods Frameworks */,
+				97B2328E4DA5543CEECC15E5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -97,6 +124,7 @@
 					14DD5F291E33EF9400AF2119 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 72J9W67S8S;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,12 +160,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		601E4B4B2D1F21EBE5EA9026 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97B2328E4DA5543CEECC15E5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC526D1F1BDDA6CCE45DC604 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		14DD5F261E33EF9400AF2119 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14DD5F301E33EF9400AF2119 /* ViewController.swift in Sources */,
+				14DD5F301E33EF9400AF2119 /* MQTTSubscribeViewController.swift in Sources */,
 				14DD5F2E1E33EF9400AF2119 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +335,10 @@
 		};
 		14DD5F3D1E33EF9400AF2119 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72J9W67S8S;
 				INFOPLIST_FILE = "RRP-Admin/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -272,8 +350,10 @@
 		};
 		14DD5F3E1E33EF9400AF2119 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72J9W67S8S;
 				INFOPLIST_FILE = "RRP-Admin/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -302,6 +382,7 @@
 				14DD5F3E1E33EF9400AF2119 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,6 @@
+framework module Pods_RRP_Admin {
+  umbrella header "Pods-RRP-Admin-umbrella.h"
+
+  export *
+  module * { export * }
+}
