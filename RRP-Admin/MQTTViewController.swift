@@ -14,7 +14,7 @@ private let DEV_HOST_NAME = ""
 private let PORT: UInt16 = 1883
 
 
-class MQTTSubscribeViewController: UIViewController {
+class MQTTViewController: UIViewController {
     
     let alert = UIAlertController(title: "Add new topic", message: "Enter a new topic to add to the list.", preferredStyle: .alert)
     let defaults = UserDefaults.standard
@@ -36,6 +36,7 @@ class MQTTSubscribeViewController: UIViewController {
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var topicListView: UIView!
     @IBOutlet weak var topicPickerView: UIPickerView!
+    @IBOutlet weak var MQTTSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,11 @@ class MQTTSubscribeViewController: UIViewController {
         }
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
             let textField = self.alert.textFields![0]
-            self.topics.append(textField.text!)
-            self.topicPickerView.reloadAllComponents()
-            textField.text = ""
+            if textField.text != "" {
+                self.topics.append(textField.text!)
+                self.topicPickerView.reloadAllComponents()
+                textField.text = ""
+            }
         }))
         
         topicListView.isHidden = true
@@ -61,15 +64,26 @@ class MQTTSubscribeViewController: UIViewController {
     }
     
     @IBAction func subscribeButtonTapped(_ sender: UIButton) {
-        if isSubscribed == false {
-            mqtt.subscribe(topicTextField.text!)
-            isSubscribed = true
-            subscribeButton.setTitle("Unsubscribe", for: .normal)
+        if subscribeButton.titleLabel?.text != "Publish" {
+            if isSubscribed == false {
+                mqtt.subscribe(topicTextField.text!)
+                isSubscribed = true
+                subscribeButton.setTitle("Unsubscribe", for: .normal)
+            } else {
+                mqtt.unsubscribe(topicTextField.text!)
+                isSubscribed = false
+                subscribeButton.setTitle("Subscribe", for: .normal)
+            }
         } else {
-            mqtt.unsubscribe(topicTextField.text!)
-            isSubscribed = false
-            subscribeButton.setTitle("Subscribe", for: .normal)
+            mqtt.publish(topicTextField.text!, withString: messagesTextView.text)
         }
+        messagesTextView.resignFirstResponder()
+    }
+    
+    @IBAction func MQTTSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+        subscribeButton.setTitle(sender.titleForSegment(at: MQTTSegmentedControl.selectedSegmentIndex), for: .normal)
+        messagesTextView.isEditable = true
+        messagesTextView.isUserInteractionEnabled = true
     }
     
     @IBAction func addTopicButtonTapped(_ sender: UIBarButtonItem) {
@@ -77,7 +91,7 @@ class MQTTSubscribeViewController: UIViewController {
     }
 }
 
-extension MQTTSubscribeViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
     
     // MARK: CocoaMQTTDelegate Methods
     
@@ -144,14 +158,26 @@ extension MQTTSubscribeViewController: CocoaMQTTDelegate, UITextFieldDelegate, U
         if topics.count >= 1 {
             topicTextField.text = topics[row]
         }
+        messagesTextView.isUserInteractionEnabled = true
+        messagesTextView.isEditable = true
         topicListView.isHidden = true
+        topicListView.isUserInteractionEnabled = false
     }
+    
+    // MARK: UITextFieldDelegate Methods
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         topicListView.isHidden = false
+        topicListView.isUserInteractionEnabled = true
+        messagesTextView.isUserInteractionEnabled = false
+        messagesTextView.isEditable = false
         return false
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
 }
 
