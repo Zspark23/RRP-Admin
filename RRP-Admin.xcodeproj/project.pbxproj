@@ -12,6 +12,9 @@
 		14DD5F331E33EF9400AF2119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F311E33EF9400AF2119 /* Main.storyboard */; };
 		14DD5F351E33EF9400AF2119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F341E33EF9400AF2119 /* Assets.xcassets */; };
 		14DD5F381E33EF9400AF2119 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F361E33EF9400AF2119 /* LaunchScreen.storyboard */; };
+		14DD5F421E3559FD00AF2119 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F411E3559FD00AF2119 /* InformationViewController.swift */; };
+		14DD5F441E356E6900AF2119 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */; };
+		14DD5F461E369D3200AF2119 /* InformationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */; };
 		C776BA72548CC9927A194543 /* Pods_RRP_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +26,9 @@
 		14DD5F341E33EF9400AF2119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14DD5F371E33EF9400AF2119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DD5F391E33EF9400AF2119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14DD5F411E3559FD00AF2119 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationDetailViewController.swift; sourceTree = "<group>"; };
 		3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.release.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.release.xcconfig"; sourceTree = "<group>"; };
 		6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.debug.xcconfig"; sourceTree = "<group>"; };
 		F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RRP_Admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +78,9 @@
 			children = (
 				14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */,
 				14DD5F2F1E33EF9400AF2119 /* MQTTViewController.swift */,
+				14DD5F411E3559FD00AF2119 /* InformationViewController.swift */,
+				14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */,
+				14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */,
 				14DD5F311E33EF9400AF2119 /* Main.storyboard */,
 				14DD5F341E33EF9400AF2119 /* Assets.xcassets */,
 				14DD5F361E33EF9400AF2119 /* LaunchScreen.storyboard */,
@@ -215,6 +224,9 @@
 			files = (
 				14DD5F301E33EF9400AF2119 /* MQTTViewController.swift in Sources */,
 				14DD5F2E1E33EF9400AF2119 /* AppDelegate.swift in Sources */,
+				14DD5F441E356E6900AF2119 /* ButtonCollectionViewCell.swift in Sources */,
+				14DD5F421E3559FD00AF2119 /* InformationViewController.swift in Sources */,
+				14DD5F461E369D3200AF2119 /* InformationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

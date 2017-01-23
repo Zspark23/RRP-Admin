@@ -96,7 +96,12 @@ extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerVi
     // MARK: CocoaMQTTDelegate Methods
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
-        print("Connected to \(host):\(port)")
+        if messagesTextView.text.isEmpty == true {
+            messagesTextView.text = ("Connected to \(host):\(port)")
+        } else {
+            messagesTextView.text = messagesTextView.text + "\n" + ("Connected to \(host):\(port)")
+        }
+        self.navigationItem.title = "Connected"
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
@@ -134,7 +139,12 @@ extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerVi
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        print("Disconnected")
+        self.navigationItem.title = "Disconnected"
+        let disconnectionAlert = UIAlertController(title: "Add new topic", message: "Enter a new topic to add to the list.", preferredStyle: .alert)
+        disconnectionAlert.addAction((UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in
+           self.mqtt.connect()
+        })))
+        disconnectionAlert.addAction((UIAlertAction(title: "No", style: .destructive, handler: nil)))
     }
 
     // MARK: UIPickerViewDataSource Methods
