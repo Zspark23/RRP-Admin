@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14A5AEAA1E4CD8CB0030D7C4 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5AEA91E4CD8CB0030D7C4 /* TopicTableViewCell.swift */; };
+		14A5AEAC1E4CE4260030D7C4 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5AEAB1E4CE4260030D7C4 /* Topic.swift */; };
 		14DD5F2E1E33EF9400AF2119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */; };
 		14DD5F301E33EF9400AF2119 /* MQTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F2F1E33EF9400AF2119 /* MQTTViewController.swift */; };
 		14DD5F331E33EF9400AF2119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DD5F311E33EF9400AF2119 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14A5AEA91E4CD8CB0030D7C4 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
+		14A5AEAB1E4CE4260030D7C4 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		14DD5F2A1E33EF9400AF2119 /* RRP-Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RRP-Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14DD5F2F1E33EF9400AF2119 /* MQTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				14DD5F411E3559FD00AF2119 /* InformationViewController.swift */,
 				14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */,
 				14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */,
+				14A5AEA91E4CD8CB0030D7C4 /* TopicTableViewCell.swift */,
+				14A5AEAB1E4CE4260030D7C4 /* Topic.swift */,
 				14DD5F311E33EF9400AF2119 /* Main.storyboard */,
 				14DD5F341E33EF9400AF2119 /* Assets.xcassets */,
 				14DD5F361E33EF9400AF2119 /* LaunchScreen.storyboard */,
@@ -225,8 +231,10 @@
 				14DD5F301E33EF9400AF2119 /* MQTTViewController.swift in Sources */,
 				14DD5F2E1E33EF9400AF2119 /* AppDelegate.swift in Sources */,
 				14DD5F441E356E6900AF2119 /* ButtonCollectionViewCell.swift in Sources */,
+				14A5AEAA1E4CD8CB0030D7C4 /* TopicTableViewCell.swift in Sources */,
 				14DD5F421E3559FD00AF2119 /* InformationViewController.swift in Sources */,
 				14DD5F461E369D3200AF2119 /* InformationDetailViewController.swift in Sources */,
+				14A5AEAC1E4CE4260030D7C4 /* Topic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +357,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72J9W67S8S;
@@ -364,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72J9W67S8S;

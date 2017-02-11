@@ -4,6 +4,7 @@
 //
 //  Created by Zack Spicer on 1/21/17.
 //  Copyright © 2017 Zack Spicer. All rights reserved.
+//  cyka/rrp/ais rrp/ais
 //
 
 import UIKit
@@ -16,15 +17,21 @@ private let PORT: UInt16 = 1883
 
 class MQTTViewController: UIViewController {
     
-    let alert = UIAlertController(title: "Add new topic", message: "Enter a new topic to add to the list.", preferredStyle: .alert)
     let defaults = UserDefaults.standard
     
-    var topics: [String] {
+    let hour = Calendar.current.component(.hour, from: Date())
+    let minutes = Calendar.current.component(.minute, from: Date())
+    
+    var topics: [Topic] {
         get {
-            return UserDefaults.standard.stringArray(forKey: "SavedStringArray") ?? [String]()
+            if defaults.object(forKey: "SavedTopicsArray") != nil {
+                return NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "SavedTopicsArray") as! Data) as! [Topic]
+            } else {
+                return []
+            }
         }
         set (array) {
-            UserDefaults.standard.set(array, forKey: "SavedStringArray")
+            defaults.set(NSKeyedArchiver.archivedData(withRootObject: array), forKey: "SavedTopicsArray")
         }
     }
     
@@ -32,30 +39,11 @@ class MQTTViewController: UIViewController {
     var mqtt: CocoaMQTT!
     
     @IBOutlet weak var topicTextField: UITextField!
-    @IBOutlet weak var messagesTextView: UITextView!
     @IBOutlet weak var subscribeButton: UIButton!
-    @IBOutlet weak var topicListView: UIView!
-    @IBOutlet weak var topicPickerView: UIPickerView!
-    @IBOutlet weak var MQTTSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var topicsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        alert.addTextField { (textField) in
-            textField.text = ""
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
-            let textField = self.alert.textFields![0]
-            if textField.text != "" {
-                self.topics.append(textField.text!)
-                self.topicPickerView.reloadAllComponents()
-                textField.text = ""
-            }
-        }))
-        
-        topicListView.isHidden = true
-        topicListView.layer.zPosition = 1
-        messagesTextView.isEditable = false
         
         mqtt = CocoaMQTT(clientId: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: PRODUCTION_HOST_NAME, port: PORT)
         mqtt.keepAlive = 90
@@ -64,44 +52,33 @@ class MQTTViewController: UIViewController {
     }
     
     @IBAction func subscribeButtonTapped(_ sender: UIButton) {
-        if subscribeButton.titleLabel?.text != "Publish" {
-            if isSubscribed == false {
-                mqtt.subscribe(topicTextField.text!)
-                isSubscribed = true
-                subscribeButton.setTitle("Unsubscribe", for: .normal)
-            } else {
-                mqtt.unsubscribe(topicTextField.text!)
-                isSubscribed = false
-                subscribeButton.setTitle("Subscribe", for: .normal)
-            }
-        } else {
-            mqtt.publish(topicTextField.text!, withString: messagesTextView.text)
+        if topicTextField.text?.trimmingCharacters(in: CharacterSet(charactersIn: " ")) == "" {
+            return
         }
-        messagesTextView.resignFirstResponder()
-    }
-    
-    @IBAction func MQTTSegmentedControlValueChanged(_ sender: UISegmentedControl) {
-        subscribeButton.setTitle(sender.titleForSegment(at: MQTTSegmentedControl.selectedSegmentIndex), for: .normal)
-        messagesTextView.isEditable = true
-        messagesTextView.isUserInteractionEnabled = true
-    }
-    
-    @IBAction func addTopicButtonTapped(_ sender: UIBarButtonItem) {
-        self.present(alert, animated: true, completion: nil)
+        
+        for topic in topics {
+            if topicTextField.text?.trimmingCharacters(in: CharacterSet(charactersIn: " ")) == topic.name {
+                return
+            }
+        }
+        
+        mqtt.subscribe(topicTextField.text!)
+        topics.append(Topic(name: topicTextField.text!))
+        topicTextField.text = ""
+        topicsTableView.reloadData()
     }
 }
 
-extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
+extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: CocoaMQTTDelegate Methods
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
-        if messagesTextView.text.isEmpty == true {
-            messagesTextView.text = ("Connected to \(host):\(port)")
-        } else {
-            messagesTextView.text = messagesTextView.text + "\n" + ("Connected to \(host):\(port)")
+        self.title = "Connected"
+        print("Did Connect to: \(host):\(port)")
+        for topic in topics {
+            mqtt.subscribe(topic.name)
         }
-        self.navigationItem.title = "Connected"
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
@@ -116,10 +93,9 @@ extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerVi
         print("Did Publish Ack")
     }
     
-    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
-        if let messageString = message.string {
-            messagesTextView.text = messagesTextView.text + "\n" + messageString
-        }
+    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
+        // IMPLIMENT FUNCTIONALITY - Add messages to specific topics
+        print("\(message.topic)")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
@@ -140,53 +116,39 @@ extension MQTTViewController: CocoaMQTTDelegate, UITextFieldDelegate, UIPickerVi
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         self.navigationItem.title = "Disconnected"
-        let disconnectionAlert = UIAlertController(title: "Add new topic", message: "Enter a new topic to add to the list.", preferredStyle: .alert)
+        print(err?.localizedDescription ?? "No error.")
+        let disconnectionAlert = UIAlertController(title: "Disconnected from broker", message: "Do you want to reconnect?", preferredStyle: .alert)
         disconnectionAlert.addAction((UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in
-           self.mqtt.connect()
+            self.mqtt.connect()
         })))
         disconnectionAlert.addAction((UIAlertAction(title: "No", style: .destructive, handler: nil)))
-    }
-
-    // MARK: UIPickerViewDataSource Methods
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        self.present(disconnectionAlert, animated: true, completion: nil)
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let topics = defaults.array(forKey: "SavedStringArray")
-        return topics?.count ?? 0
+    // MARK: UITableViewDataSource Methods
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell", for: indexPath) as! TopicTableViewCell
+        cell.configureCellWithTopic(topic: topics[indexPath.row])
+        return cell
     }
     
-    // MARK: UIPickerViewDelegate Methods
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return topics[row]
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return topics.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if topics.count >= 1 {
-            topicTextField.text = topics[row]
-        }
-        messagesTextView.isUserInteractionEnabled = true
-        messagesTextView.isEditable = true
-        topicListView.isHidden = true
-        topicListView.isUserInteractionEnabled = false
-    }
+    // MARK: UITabbleViewDelegate Methods
     
-    // MARK: UITextFieldDelegate Methods
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        topicListView.isHidden = false
-        topicListView.isUserInteractionEnabled = true
-        messagesTextView.isUserInteractionEnabled = false
-        messagesTextView.isEditable = false
-        return false
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            mqtt.unsubscribe(topics[indexPath.row].name)
+            topics.remove(at: indexPath.row)
+            topicsTableView.reloadData()
+        }
     }
     
 }
