@@ -11,7 +11,7 @@ import Foundation
 class Topic : NSObject, NSCoding {
     
     let name: String
-    let messages: [String]
+    var messages: [String]
     let newMessages: Bool
     
     init(name: String) {

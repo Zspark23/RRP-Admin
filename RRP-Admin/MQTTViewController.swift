@@ -67,6 +67,13 @@ class MQTTViewController: UIViewController {
         topicTextField.text = ""
         topicsTableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sender is IndexPath {
+            let viewController = segue.destination as! TopicMessagesViewController
+            viewController.topic = topics[(sender as! IndexPath).row]
+        }
+    }
 }
 
 extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableViewDelegate {
@@ -94,8 +101,34 @@ extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableV
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-        // IMPLIMENT FUNCTIONALITY - Add messages to specific topics
-        print("\(message.topic)")
+        let tempTopics = topics
+        for topic in tempTopics {
+            if message.string != nil || message.string != "" {
+                let messageTopicArray = message.topic.components(separatedBy: "/")
+                var subscribedTopicArray = topic.name.components(separatedBy: "/")
+                var bound = 0
+                
+                if subscribedTopicArray.last == "#" { subscribedTopicArray.removeLast() }
+                
+                if messageTopicArray.count > subscribedTopicArray.count {
+                    bound = subscribedTopicArray.count
+                } else {
+                    bound = messageTopicArray.count
+                }
+                
+                for index in 0..<bound {
+                    if messageTopicArray[index] == subscribedTopicArray[index] {
+                        if index == bound - 1 {
+                            topic.messages.append(message.string!)
+                        }
+                    } else {
+                        break
+                    }
+                }
+            }
+        }
+        topics = tempTopics
+        topicsTableView.reloadData()
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
@@ -149,6 +182,10 @@ extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableV
             topics.remove(at: indexPath.row)
             topicsTableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showTopicMessagesViewController", sender: indexPath)
     }
     
 }

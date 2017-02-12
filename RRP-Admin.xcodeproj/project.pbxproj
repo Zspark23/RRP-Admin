@@ -17,6 +17,7 @@
 		14DD5F421E3559FD00AF2119 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F411E3559FD00AF2119 /* InformationViewController.swift */; };
 		14DD5F441E356E6900AF2119 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */; };
 		14DD5F461E369D3200AF2119 /* InformationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */; };
+		14F695351E4F947E004A99E7 /* TopicMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F695341E4F947E004A99E7 /* TopicMessagesViewController.swift */; };
 		C776BA72548CC9927A194543 /* Pods_RRP_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		14DD5F411E3559FD00AF2119 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationDetailViewController.swift; sourceTree = "<group>"; };
+		14F695341E4F947E004A99E7 /* TopicMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicMessagesViewController.swift; sourceTree = "<group>"; };
 		3A8D63CEC910923D5A9166E8 /* Pods-RRP-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.release.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.release.xcconfig"; sourceTree = "<group>"; };
 		6863EC351959DCE0DF508043 /* Pods-RRP-Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRP-Admin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RRP-Admin/Pods-RRP-Admin.debug.xcconfig"; sourceTree = "<group>"; };
 		F67568CE5A52A016317CEF04 /* Pods_RRP_Admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RRP_Admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 			children = (
 				14DD5F2D1E33EF9400AF2119 /* AppDelegate.swift */,
 				14DD5F2F1E33EF9400AF2119 /* MQTTViewController.swift */,
+				14F695341E4F947E004A99E7 /* TopicMessagesViewController.swift */,
 				14DD5F411E3559FD00AF2119 /* InformationViewController.swift */,
 				14DD5F451E369D3200AF2119 /* InformationDetailViewController.swift */,
 				14DD5F431E356E6900AF2119 /* ButtonCollectionViewCell.swift */,
@@ -234,6 +237,7 @@
 				14A5AEAA1E4CD8CB0030D7C4 /* TopicTableViewCell.swift in Sources */,
 				14DD5F421E3559FD00AF2119 /* InformationViewController.swift in Sources */,
 				14DD5F461E369D3200AF2119 /* InformationDetailViewController.swift in Sources */,
+				14F695351E4F947E004A99E7 /* TopicMessagesViewController.swift in Sources */,
 				14A5AEAC1E4CE4260030D7C4 /* Topic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
