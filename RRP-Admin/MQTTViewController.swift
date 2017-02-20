@@ -36,19 +36,20 @@ class MQTTViewController: UIViewController {
     }
     
     var isSubscribed = false
-    var mqtt: CocoaMQTT!
+    var mqtt = MQTTController.sharedInstance.mqtt!
     
     @IBOutlet weak var topicTextField: UITextField!
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var topicsTableView: UITableView!
+    @IBOutlet weak var connectionSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mqtt = CocoaMQTT(clientId: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: PRODUCTION_HOST_NAME, port: PORT)
-        mqtt.keepAlive = 90
+        connectionSwitch.setOn(false, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         mqtt.delegate = self
-        mqtt.connect()
     }
     
     @IBAction func subscribeButtonTapped(_ sender: UIButton) {
@@ -68,6 +69,14 @@ class MQTTViewController: UIViewController {
         topicsTableView.reloadData()
     }
     
+    @IBAction func connectionIndicatorSwitchTapped(_ sender: UISwitch) {
+        if connectionSwitch.isOn == false {
+            mqtt.disconnect()
+        } else {
+            mqtt.connect()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender is IndexPath {
             let viewController = segue.destination as! TopicMessagesViewController
@@ -81,7 +90,7 @@ extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableV
     // MARK: CocoaMQTTDelegate Methods
     
     func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
-        self.title = "Connected"
+        connectionSwitch.setOn(true, animated: true)
         print("Did Connect to: \(host):\(port)")
         for topic in topics {
             mqtt.subscribe(topic.name)
@@ -148,7 +157,7 @@ extension MQTTViewController: CocoaMQTTDelegate, UITableViewDataSource, UITableV
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        self.navigationItem.title = "Disconnected"
+        connectionSwitch.setOn(false, animated: true)
         print(err?.localizedDescription ?? "No error.")
         let disconnectionAlert = UIAlertController(title: "Disconnected from broker", message: "Do you want to reconnect?", preferredStyle: .alert)
         disconnectionAlert.addAction((UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in

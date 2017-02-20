@@ -21,7 +21,7 @@ class TopicMessagesViewController: UIViewController {
         if let t = self.topic {
             topicNameTextField.text = t.name
             for message in t.messages {
-                topicMessagesTextView.text = message
+                topicMessagesTextView.text = topicMessagesTextView.text + message + "\n"
             }
         }
     }
