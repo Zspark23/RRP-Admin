@@ -16,7 +16,7 @@ class KartTableViewCell: UITableViewCell {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     
-    static var expandedHeight: CGFloat { get { return 85 }}
+    static var expandedHeight: CGFloat { get { return 82 }}
     static var defaultHeight: CGFloat { get { return 44 }}
     
     var isObservingFrame: Bool = false
@@ -56,6 +56,7 @@ class KartTableViewCell: UITableViewCell {
     }
     
     @IBAction func infoButtonTapped(_ sender: UIButton) {
+        
     }
     
     

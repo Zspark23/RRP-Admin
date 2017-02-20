@@ -10,14 +10,22 @@ import UIKit
 
 class InformationDetailViewController: UIViewController {
     
+    @IBOutlet weak var kartInfoTableView: UITableView!
+    
     var selectedIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let indexPaths = kartInfoTableView.indexPathsForVisibleRows?.count {
+            for row in 0..<indexPaths {
+                (kartInfoTableView.cellForRow(at: IndexPath(row: row, section: 0)) as! KartTableViewCell).ignoreFrameChanges()
+            }
+        }
+    }
 }
 
 extension InformationDetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -72,9 +80,7 @@ extension InformationDetailViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath == selectedIndexPath {
-            (cell as! KartTableViewCell).ignoreFrameChanges()
-        }
+        (cell as! KartTableViewCell).ignoreFrameChanges()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
